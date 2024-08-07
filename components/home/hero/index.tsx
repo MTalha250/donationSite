@@ -7,13 +7,13 @@ const Hero = () => {
   const { scrollY } = useScroll();
   const scale = useTransform(scrollY, [0, 300], [1, 1.1]);
 
-  const [scroll, setScroll] = useState("0");
+  const [scroll, setScroll] = useState("opacity-0 invisible");
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 150) {
-        setScroll("100");
+        setScroll("opacity-100 visible");
       } else {
-        setScroll("0");
+        setScroll("opacity-0 invisible");
       }
     };
     window.addEventListener("scroll", handleScroll);
@@ -21,7 +21,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="text-[#18412E] h-[80vh] fixed w-full top-0">
+    <div className="text-[#18412E] h-[80vh] fixed w-full top-0 -z-10">
       <motion.img
         src="https://d25oniaj7o2jcw.cloudfront.net/full-illustration-desktop-20220802@2x.jpg"
         alt=""
@@ -42,7 +42,7 @@ const Hero = () => {
       </div>
       <div
         className={
-          "absolute w-full h-full bg-black/50 top-0 left-0 transition duration-300 opacity-" +
+          "absolute w-full h-full bg-black/50 top-0 left-0 transition duration-300 " +
           scroll
         }
       />
