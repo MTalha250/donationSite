@@ -16,13 +16,16 @@ const Navbar = () => {
   const [scroll, setScroll] = useState(
     "text-lg rounded-full top-5 scale-[0.8] px-8"
   );
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
         setScroll("rounded-none top-0 scale-100 px-32");
+        setScrolled(true);
       } else {
         setScroll("rounded-full top-5 scale-[0.8] px-8");
+        setScrolled(false);
       }
     };
 
@@ -99,11 +102,17 @@ const Navbar = () => {
       <div className="flex items-center">
         <Link
           href="/login"
-          className="mr-10 px-4 py-2 hover:bg-slate-100 hover:text-slate-900 transition-colors rounded-lg"
+          className="mr-5 px-4 py-2 hover:bg-slate-100 hover:text-slate-900 transition-colors rounded-lg"
         >
           Sign in
         </Link>
-        <Button className="bg-transparent rounded-full border border-black text-lg text-black font-bold hover:bg-primary hover:text-white">
+        <Button
+          className={
+            scrolled
+              ? "bg-primary rounded-full text-white font-bold hover:bg-green-700"
+              : "bg-transparent rounded-full border border-black text-lg text-black font-bold hover:bg-primary hover:text-white"
+          }
+        >
           Start a campaign
         </Button>
       </div>
