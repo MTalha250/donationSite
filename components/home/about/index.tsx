@@ -32,7 +32,7 @@ const About = ({
         whileInView={{ scaleX: 1, borderRadius: 0 }}
         viewport={{ amount: 0.3 }}
         className={
-          "py-20 px-8 md:px-16 lg:px-24 xl:px-32 h-[75vh] flex items-center " +
+          "py-20 px-8 md:px-16 lg:px-24 xl:px-32 min-h-[75vh] flex items-center " +
           className
         }
       >
