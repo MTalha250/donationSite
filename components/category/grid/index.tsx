@@ -1,28 +1,17 @@
-import Card from "@/components/card";
-import Link from "next/link";
 import React from "react";
-import { FaArrowRightLong } from "react-icons/fa6";
+import Card from "@/components/card";
 
-const Discover = () => {
+const Grid = () => {
   return (
-    <div className="mt-[80vh] h-screen rounded-t-[2rem] bg-white -translate-y-10 px-8 md:px-16 lg:px-24 xl:px-32 py-20">
-      <div className="flex justify-between">
-        <h1 className="font-semibold text-2xl">
-          Discover fundraisers inspired by what you care about
-        </h1>
-        <Link href="" className="text-neutral-500 flex items-center">
-          Explore more
-          <FaArrowRightLong className="inline-block ml-2 animate-bounce-horizontal" />
-        </Link>
-      </div>
-      <div className="mt-10 grid grid-cols-4 gap-3 first:col-span-2 first:row-span-2">
+    <div className="px-8 md:px-16 lg:px-24 xl:px-32 py-20">
+      <h2 className="text-xl font-semibold">Browse Medical Fundraisers</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
         <Card
           image="https://images.gofundme.com/nCkCx97MTCtsCayMUVLoLJa0PXI=/720x405/https://d2g8igdw686xgo.cloudfront.net/81865453_1722894387648104_r.jpeg"
           title="Help repair the damage from Hurricane Ida"
           donations={100}
           totalAmount={100000}
           amountRaised={60000}
-          first
         />
         <Card
           image="https://images.gofundme.com/nCkCx97MTCtsCayMUVLoLJa0PXI=/720x405/https://d2g8igdw686xgo.cloudfront.net/81865453_1722894387648104_r.jpeg"
@@ -45,9 +34,23 @@ const Discover = () => {
           totalAmount={100000}
           amountRaised={50000}
         />
+        <Card
+          image="https://images.gofundme.com/nCkCx97MTCtsCayMUVLoLJa0PXI=/720x405/https://d2g8igdw686xgo.cloudfront.net/81865453_1722894387648104_r.jpeg"
+          title="Help repair the damage from Hurricane Ida"
+          donations={100}
+          totalAmount={100000}
+          amountRaised={50000}
+        />
+        <Card
+          image="https://images.gofundme.com/nCkCx97MTCtsCayMUVLoLJa0PXI=/720x405/https://d2g8igdw686xgo.cloudfront.net/81865453_1722894387648104_r.jpeg"
+          title="Help repair the damage from Hurricane Ida"
+          donations={100}
+          totalAmount={100000}
+          amountRaised={50000}
+        />
       </div>
     </div>
   );
 };
 
-export default Discover;
+export default Grid;

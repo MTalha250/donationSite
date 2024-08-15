@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+//@ts-ignore
 import ProgressBar from "@ramonak/react-progress-bar";
 
 interface Props {
@@ -42,7 +43,7 @@ const Card = ({
       <div
         className={
           "rounded-xl overflow-hidden relative w-full" +
-          (first ? " h-full" : " h-[20vh]")
+          (first ? " h-full" : " h-[25vh]")
         }
       >
         <img
@@ -56,7 +57,7 @@ const Card = ({
           </span>
         </span>
       </div>
-      <h1 className="font-bold mt-4">{title}</h1>
+      <h1 className="font-bold mt-4 line-clamp-1">{title}</h1>
       <div>
         <ProgressBar
           completed={

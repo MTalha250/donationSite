@@ -20,8 +20,19 @@ const config = {
     extend: {
       colors: {
         primary: "#75924B",
+        "primary-dark": "#012D19",
       },
       keyframes: {
+        "bounce-horizontal": {
+          "0%, 100%": {
+            transform: "translateX(25%)",
+            animationTimingFunction: "cubic-bezier(0.8, 0, 1, 1)",
+          },
+          "50%": {
+            transform: "translateX(0)",
+            animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+          },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -34,6 +45,7 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "bounce-horizontal": "bounce-horizontal 1s infinite",
       },
     },
   },
