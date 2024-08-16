@@ -5,6 +5,7 @@ import { BsShieldCheck } from "react-icons/bs";
 //@ts-ignore
 import ProgressBar from "@ramonak/react-progress-bar";
 import Link from "next/link";
+import Image from "next/image";
 const Main = () => {
   return (
     <div className="px-8 md:px-16 lg:px-24 xl:px-32 pt-32 pb-20">
@@ -13,7 +14,7 @@ const Main = () => {
       </h1>
       <div className="flex gap-10">
         <div className="w-3/5">
-          <img
+          <Image
             src="https://images.gofundme.com/oqXq_fUbVoOJuZkC6DCOfOq3vmw=/720x405/https://d2g8igdw686xgo.cloudfront.net/81050879_1719513663170911_r.jpeg"
             alt=""
             className="rounded-2xl mb-5"

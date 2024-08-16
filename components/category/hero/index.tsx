@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import React from "react";
 
 const Hero = () => {
@@ -18,7 +19,7 @@ const Hero = () => {
           </Button>
         </div>
         <div className="pl-10 w-[35%] h-full">
-          <img
+          <Image
             src="https://d25oniaj7o2jcw.cloudfront.net/photo-category-medical-uk@2x.jpg"
             alt=""
             className="w-full h-full object-cover rounded-2xl"
