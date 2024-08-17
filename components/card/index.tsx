@@ -2,7 +2,6 @@
 import React from "react";
 //@ts-ignore
 import ProgressBar from "@ramonak/react-progress-bar";
-import Image from "next/image";
 
 interface Props {
   image: string;
@@ -47,7 +46,7 @@ const Card = ({
           (first ? " h-full" : " h-[25vh]")
         }
       >
-        <Image
+        <img
           src={image}
           alt={title}
           className="w-full h-full hover:scale-105 transition duration-200 object-cover"

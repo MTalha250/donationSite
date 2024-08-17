@@ -11,7 +11,6 @@ import {
 import { navLinks } from "@/constants";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import Image from "next/image";
 
 const Navbar = () => {
   const [scroll, setScroll] = useState(
@@ -97,7 +96,7 @@ const Navbar = () => {
       </div>
       <div className="absolute left-1/2 transform -translate-x-1/2">
         <Link href="/">
-          <Image src={logo.src} alt="logo" className="w-44" />
+          <img src={logo.src} alt="logo" className="w-44" />
         </Link>
       </div>
       <div className="flex items-center">

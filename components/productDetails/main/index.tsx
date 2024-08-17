@@ -14,7 +14,7 @@ const Main = () => {
       </h1>
       <div className="flex gap-10">
         <div className="w-3/5">
-          <Image
+          <img
             src="https://images.gofundme.com/oqXq_fUbVoOJuZkC6DCOfOq3vmw=/720x405/https://d2g8igdw686xgo.cloudfront.net/81050879_1719513663170911_r.jpeg"
             alt=""
             className="rounded-2xl mb-5"
