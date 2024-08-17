@@ -1,4 +1,4 @@
-import Grid from "@/components/category/grid";
+import Grid from "@/components/grid";
 import Hero from "@/components/category/hero";
 import React from "react";
 
