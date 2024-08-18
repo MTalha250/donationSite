@@ -5,7 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 const Discover = () => {
   return (
-    <div className="mt-[80vh] h-screen rounded-t-[2rem] bg-white -translate-y-10 px-8 md:px-16 lg:px-24 xl:px-32 py-20">
+    <div className="mt-[80vh] rounded-t-[2rem] bg-white -translate-y-10 px-8 md:px-16 lg:px-24 xl:px-32 pt-20 pb-10">
       <div className="flex justify-between">
         <h1 className="font-semibold text-2xl">
           Discover fundraisers inspired by what you care about

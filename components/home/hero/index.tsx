@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import img from "@/assets/home.jpg";
 
 const Hero = () => {
   const { scrollY } = useScroll();
@@ -21,23 +22,25 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="text-[#18412E] h-[80vh] fixed w-full top-0 -z-10">
+    <div className="text-[#18412E] h-[70vh] sm:h-[80vh] fixed w-full top-0 -z-10">
       <motion.img
-        src="https://d25oniaj7o2jcw.cloudfront.net/full-illustration-desktop-20220802@2x.jpg"
+        src={img.src}
         alt=""
         className="w-full h-full object-cover absolute top-0 left-0"
         style={{ scale }}
       />
-      <div className="bg-fixed flex flex-col justify-center items-center space-y-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <p className="text-xl font-semibold">Leading crowdfunding platform</p>
-        <h1 className="text-6xl font-semibold text-center">
-          Your home <br /> for help
+      <div className="flex flex-col justify-center items-center space-y-4 sm:space-y-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center px-4 sm:px-0">
+        <p className="text-lg sm:text-xl font-semibold">
+          Your actions can change lives
+        </p>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold">
+          A Space for Making a Difference
         </h1>
         <Link
-          href="/campaigns"
-          className="bg-white px-8 py-4 rounded-xl font-bold text-sm"
+          href="/fundraiser"
+          className="bg-white px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-bold text-sm sm:text-base"
         >
-          Start a campaign
+          Start a Fundraiser
         </Link>
       </div>
       <div

@@ -1,11 +1,12 @@
 import About from "@/components/home/about";
 import Discover from "@/components/home/discover";
 import Hero from "@/components/home/hero";
+import Video from "@/components/home/video";
 import React from "react";
 
 const page = () => {
   return (
-    <div>
+    <div className="bg-white">
       <Hero />
       <Discover />
       <About
@@ -13,6 +14,7 @@ const page = () => {
         title="Fundraising with CARING 4 ALL is simple, effective, and reliable."
         description="Obtain the resources you need to ensure your fundraiser's success with CARING 4 ALL. Whether you're raising funds for yourself, friends, family, or charity, there are no fees to get started. CARING 4 ALL is the leading platform for crowdfunding – from memorial tributes and funerals to medical emergencies and charitable causes. Whenever you need assistance, you can find it here."
       />
+      <Video />
       <About
         className="bg-[#012D19] text-white"
         title="We've got everything you need."

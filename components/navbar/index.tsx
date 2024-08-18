@@ -40,7 +40,7 @@ const Navbar = () => {
         scroll
       }
     >
-      <div className="flex items-center">
+      <div className="hidden md:flex items-center">
         <NavigationMenu>
           <NavigationMenuList>
             {navLinks.map((link) => (
@@ -94,7 +94,7 @@ const Navbar = () => {
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-      <div className="absolute left-1/2 transform -translate-x-1/2">
+      <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
         <Link href="/">
           <img src={logo.src} alt="logo" className="w-44" />
         </Link>
@@ -106,15 +106,16 @@ const Navbar = () => {
         >
           Sign in
         </Link>
-        <Button
+        <Link
+          href="/fundraiser"
           className={
             scrolled
-              ? "bg-primary rounded-full text-white font-bold hover:bg-green-700"
-              : "bg-transparent rounded-full border border-black text-lg text-black font-bold hover:bg-primary hover:text-white"
+              ? "bg-primary rounded-full text-white font-semibold hover:bg-green-700 px-4 py-2"
+              : "py-2 px-4 bg-transparent rounded-full border border-black text-lg text-black font-semibold hover:bg-primary hover:text-white"
           }
         >
-          Start a campaign
-        </Button>
+          Start a Fundraiser
+        </Link>
       </div>
     </div>
   );

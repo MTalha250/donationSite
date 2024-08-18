@@ -26,7 +26,7 @@ const About = ({
   description: string;
 }) => {
   return (
-    <div className="bg-white -translate-y-10">
+    <div className="bg-white">
       <motion.div
         initial={{ scaleX: 0.9, borderRadius: "2rem" }}
         whileInView={{ scaleX: 1, borderRadius: 0 }}
