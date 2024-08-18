@@ -5,7 +5,7 @@ import React from "react";
 import { useParams } from "next/navigation";
 import { categoryData } from "@/constants";
 
-const page = () => {
+const Category = () => {
   const { category } = useParams();
   const { title, image } = categoryData.find((c) => c.name === category) || {};
   return (
@@ -16,4 +16,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Category;
