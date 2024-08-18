@@ -18,7 +18,7 @@ const Video = () => {
   return (
     <div className="px-8 md:px-16 lg:px-24 xl:px-32 py-20 bg-white">
       <h2 className="text-xl sm:text-2xl font-semibold text-center">
-        How Care 4 All Works
+        How Caring 4 All Works
       </h2>
       <div className="relative mt-6">
         <img

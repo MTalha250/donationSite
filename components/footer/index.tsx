@@ -76,7 +76,7 @@ const Footer = () => {
             <ul className="mt-4 space-y-2">
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900">
-                  How Care 4 All works
+                  How Caring 4 All works
                 </a>
               </li>
               <li>
@@ -101,7 +101,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900">
-                  About Care 4 All
+                  About Caring 4 All
                 </a>
               </li>
               <li>
@@ -116,7 +116,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Care4All.org
+                  Caring4All.com
                 </a>
               </li>
             </ul>
@@ -134,9 +134,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-sm text-gray-600">
-            &copy; 2010-2024 Care 4 All
-          </div>
+          <div className="text-sm text-gray-600">&copy; 2024 Caring 4 All</div>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <a href="#" className="text-gray-600 hover:text-gray-900">
               Terms
