@@ -1,9 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import img from "@/assets/fundraiser.jpg";
 import PhotosUploader from "@/components/fundraiser/uploader";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 
 const Fundraiser = () => {
   const [step, setStep] = useState(1);
@@ -17,7 +19,16 @@ const Fundraiser = () => {
   const [fundraiserDescription, setFundraiserDescription] = useState("");
   const [fundraiserCategory, setFundraiserCategory] = useState("");
   const router = useRouter();
+  const { data, status, update } = useSession();
+  const user = data?.user;
 
+  useEffect(() => {
+    if (status === "loading") return;
+    if (!user) {
+      toast.error("Please login to create a fundraiser.");
+      router.push("/login");
+    }
+  }, [user, status]);
   const validateStep1 = () => {
     if (!amount || isNaN(amount)) {
       toast.error("Please enter a valid amount.");
@@ -47,25 +58,42 @@ const Fundraiser = () => {
     return true;
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (step === 1 && validateStep1()) {
       setStep(step + 1);
     } else if (step === 2 && validateStep2()) {
       setStep(step + 1);
     } else if (step === 3 && validateStep3()) {
-      toast.success("Fundraiser created successfully");
-      console.log({
-        amount,
-        firstName,
-        lastName,
-        email,
-        phone,
-        fundraiserTitle,
-        fundraiserDescription,
-        fundraiserCategory,
-        images,
-      });
-      router.push("/");
+      try {
+        const response = await axios.post("/api/fundraiser", {
+          totalAmount: amount,
+          firstName,
+          lastName,
+          email,
+          phone,
+          title: fundraiserTitle,
+          description: fundraiserDescription,
+          category: fundraiserCategory,
+          image: images[0],
+          user: user?.id,
+        });
+        await update({
+          ...data,
+          user: {
+            ...data?.user,
+            fundraisers: [
+              ...(data?.user?.fundraisers || []),
+              response.data.fundraiser,
+            ],
+          },
+        });
+
+        toast.success(response.data.message);
+        router.push("/");
+      } catch (error) {
+        toast.error("Something went wrong");
+        console.error(error);
+      }
     }
   };
 

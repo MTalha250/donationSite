@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import {
   Form,
@@ -15,11 +14,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import Link from "next/link";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const formSchema = z
   .object({
     firstName: z.string().min(1, { message: "First name is required" }),
     lastName: z.string().min(1, { message: "Last name is required" }),
+    phone: z
+      .string()
+      .min(10, { message: "Phone number must be at least 10 digits long" })
+      .regex(/^\d+$/, { message: "Phone number must contain only digits" }),
     email: z.string().email({ message: "Please enter a valid email address" }),
     password: z
       .string()
@@ -35,29 +41,42 @@ const formSchema = z
 
 export default function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
+      phone: "",
       email: "",
       password: "",
       confirmPassword: "",
     },
   });
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(values);
+    try {
+      const response = await axios.post("/api/register", {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        phone: values.phone,
+        email: values.email.toLowerCase(),
+        password: values.password,
+      });
+      toast.success(response.data.message);
+      router.push("/login");
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+      console.log(error);
+    }
     setIsSubmitting(false);
+    form.reset();
   }
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-[#f7f7f8]">
+    <div className="flex flex-col-reverse md:flex-row min-h-screen bg-[#f7f7f8] pt-24 md:pt-0">
       {/* Left side - Visual Section */}
-      <div className="lg:w-1/2 w-full bg-gradient-to-r from-[#75924B] to-[#5f743d] flex flex-col items-center justify-center text-white p-10">
+      <div className="md:w-1/2 w-full bg-gradient-to-r from-[#75924B] to-[#5f743d] flex flex-col items-center justify-center text-white p-10">
         <div className="text-center">
           <h2 className="text-4xl font-bold leading-tight">
             Join our community
@@ -70,20 +89,20 @@ export default function Register() {
       </div>
 
       {/* Right side - Form Section */}
-      <div className="lg:w-1/2 w-full flex flex-col justify-center items-center lg:items-end p-6 lg:pr-32 lg:pt-20">
-        <div className="bg-white p-8 lg:p-10 rounded-xl shadow-lg w-full max-w-md">
-          <h1 className="text-gray-900 text-3xl font-semibold mb-2">
+      <div className="md:w-1/2 w-full flex flex-col justify-center items-center md:items-end p-6 md:pr-32 md:pt-20">
+        <div className="bg-white p-8 md:p-10 rounded-xl shadow-lg w-full max-w-md">
+          <h1 className="text-gray-900 text-2xl sm:text-3xl font-semibold mb-2">
             Create an Account
           </h1>
           <h2 className="text-gray-500 text-sm mb-8">Join CARING 4 ALL</h2>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <div className="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
+              <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
                 <FormField
                   name="firstName"
                   control={form.control}
                   render={({ field }) => (
-                    <FormItem className="lg:w-1/2 w-full">
+                    <FormItem className="md:w-1/2 w-full">
                       <FormLabel>First Name</FormLabel>
                       <FormControl>
                         <Input
@@ -100,7 +119,7 @@ export default function Register() {
                   name="lastName"
                   control={form.control}
                   render={({ field }) => (
-                    <FormItem className="lg:w-1/2 w-full">
+                    <FormItem className="md:w-1/2 w-full">
                       <FormLabel>Last Name</FormLabel>
                       <FormControl>
                         <Input
@@ -114,6 +133,23 @@ export default function Register() {
                   )}
                 />
               </div>
+              <FormField
+                name="phone"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder="Enter your phone number"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 name="email"
                 control={form.control}
@@ -131,40 +167,42 @@ export default function Register() {
                   </FormItem>
                 )}
               />
-              <FormField
-                name="password"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Enter your password"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                name="confirmPassword"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Confirm your password"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+                <FormField
+                  name="password"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem className="md:w-1/2 w-full">
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="Enter your password"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  name="confirmPassword"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem className="md:w-1/2 w-full">
+                      <FormLabel>Confirm Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="Confirm your password"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
               <div className="flex justify-end items-center">
                 <Button
                   type="submit"

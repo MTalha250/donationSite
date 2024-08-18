@@ -8,15 +8,26 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import Profile from "../profile";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { navLinks } from "@/constants";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { signOut, useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [scroll, setScroll] = useState(
     "text-lg rounded-full top-5 scale-[0.8] px-8"
   );
   const [scrolled, setScrolled] = useState(false);
+  const { data } = useSession();
+  const user = data?.user;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,12 +111,34 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="flex items-center">
-        <Link
-          href="/login"
-          className="mr-5 px-4 py-2 hover:bg-slate-100 hover:text-slate-900 transition-colors rounded-lg"
-        >
-          Sign in
-        </Link>
+        {user ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger className="mr-5 px-4 py-2 hover:bg-slate-100 hover:text-slate-900 transition-colors rounded-lg">
+              Hi {user.firstName}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <Profile />
+              <DropdownMenuItem
+                className="cursor-pointer text-center block"
+                onClick={() => {
+                  signOut({
+                    redirect: false,
+                  });
+                  toast.success("Logged out successfully");
+                }}
+              >
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <Link
+            href="/login"
+            className="mr-5 px-4 py-2 hover:bg-slate-100 hover:text-slate-900 transition-colors rounded-lg"
+          >
+            Sign in
+          </Link>
+        )}
         <Link
           href="/fundraiser"
           className={

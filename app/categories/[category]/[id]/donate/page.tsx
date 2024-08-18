@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import img from "@/assets/fundraiser.jpg";
+import img from "@/assets/donation.jpg";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 const Donation = () => {
@@ -68,7 +68,10 @@ const Donation = () => {
       </div>
       <div className="flex justify-center bg-[#333333] py-6 md:py-10">
         <div className="w-full max-w-3xl bg-[#F8F3E8] py-6 sm:py-8 md:py-10 px-8 md:px-16 -translate-y-20 md:-translate-y-32">
-          <div className="flex items-center sm:gap-4 md:gap-6 justify-center">
+          <h1 className="text-center font-semibold text-lg">
+            Help repair the damage from Hurricane Ida
+          </h1>
+          <div className="mt-10 flex items-center sm:gap-4 md:gap-6 justify-center">
             <div className="flex flex-col items-center">
               <span
                 className={
