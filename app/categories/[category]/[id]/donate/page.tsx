@@ -1,8 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import img from "@/assets/donation.jpg";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import { Fundraiser } from "@/types";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+
 const Donation = () => {
   const [step, setStep] = useState(1);
   const [amount, setAmount] = useState(0);
@@ -13,7 +18,24 @@ const Donation = () => {
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [cvv, setCvv] = useState("");
+  const [fundraiser, setFundraiser] = useState<Fundraiser>();
   const router = useRouter();
+  const { id } = useParams();
+  const { data, update } = useSession();
+  const user = data?.user;
+
+  const fetchFundraiser = async () => {
+    try {
+      const response = await axios.get(`/api/fundraiser/${id}`);
+      setFundraiser(response.data.result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchFundraiser();
+  }, [id]);
 
   const validateStep1 = () => {
     if (!amount || isNaN(amount)) {
@@ -39,26 +61,44 @@ const Donation = () => {
     return true;
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (step === 1 && validateStep1()) {
       setStep(step + 1);
     } else if (step === 2 && validateStep2()) {
       setStep(step + 1);
     } else if (step === 3 && validateStep3()) {
-      toast.success("Donation made successfully");
-      console.log({
-        amount,
-        firstName,
-        lastName,
-        email,
-        phone,
-        cardNumber,
-        expiryDate,
-        cvv,
-      });
-      router.back();
+      try {
+        const response = await axios.post("/api/donation", {
+          amount,
+          firstName,
+          lastName,
+          email,
+          phone,
+          paymentMethod: "card",
+          fundraiser: id,
+          user: user?.id,
+        });
+        await update({
+          ...data,
+          user: {
+            ...data?.user,
+            donations: [
+              ...(data?.user?.donations ?? []),
+              response.data.donation,
+            ],
+          },
+        });
+        toast.success(response.data.message);
+        router.back();
+      } catch (error) {
+        console.error(error);
+        toast.error("Something went wrong.");
+      }
     }
   };
+
+  const remainingAmount =
+    (fundraiser?.totalAmount ?? 0) - (fundraiser?.amountRaised ?? 0);
 
   return (
     <div>
@@ -67,9 +107,9 @@ const Donation = () => {
         <div className="bg-black/50 top-0 left-0 absolute w-full h-full"></div>
       </div>
       <div className="flex justify-center bg-[#333333] py-6 md:py-10">
-        <div className="w-full max-w-3xl bg-[#F8F3E8] py-6 sm:py-8 md:py-10 px-8 md:px-16 -translate-y-20 md:-translate-y-32">
+        <div className="w-full max-w-4xl bg-[#F8F3E8] py-6 sm:py-8 md:py-10 px-8 md:px-16 -translate-y-20 md:-translate-y-32">
           <h1 className="text-center font-semibold text-lg">
-            Help repair the damage from Hurricane Ida
+            {fundraiser?.title}
           </h1>
           <div className="mt-10 flex items-center sm:gap-4 md:gap-6 justify-center">
             <div className="flex flex-col items-center">
@@ -155,53 +195,71 @@ const Donation = () => {
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 mb-8 sm:mb-10">
                   <button
-                    className={
-                      amount === 25
-                        ? "border border-black p-6 sm:p-10 text-center text-2xl sm:text-4xl bg-primary text-white"
-                        : "border border-black p-6 sm:p-10 text-center text-2xl sm:text-4xl hover:bg-black/10"
-                    }
-                    onClick={() => setAmount(25)}
+                    className={`border border-black p-6 sm:p-10 text-center text-2xl sm:text-3xl ${
+                      amount === 500
+                        ? "bg-primary text-white"
+                        : remainingAmount < 500
+                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        : "hover:bg-black/10"
+                    }`}
+                    onClick={() => setAmount(500)}
+                    disabled={remainingAmount < 500}
                   >
-                    $25
+                    PKR 500
                   </button>
                   <button
-                    className={
-                      amount === 50
-                        ? "border border-black p-6 sm:p-10 text-center text-2xl sm:text-4xl bg-primary text-white"
-                        : "border border-black p-6 sm:p-10 text-center text-2xl sm:text-4xl hover:bg-black/10"
-                    }
-                    onClick={() => setAmount(50)}
+                    className={`border border-black p-6 sm:p-10 text-center text-2xl sm:text-3xl ${
+                      amount === 1000
+                        ? "bg-primary text-white"
+                        : remainingAmount < 1000
+                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        : "hover:bg-black/10"
+                    }`}
+                    onClick={() => setAmount(1000)}
+                    disabled={remainingAmount < 1000}
                   >
-                    $50
+                    PKR 1000
                   </button>
                   <button
-                    className={
-                      amount === 100
-                        ? "border border-black p-6 sm:p-10 text-center text-2xl sm:text-4xl bg-primary text-white"
-                        : "border border-black p-6 sm:p-10 text-center text-2xl sm:text-4xl hover:bg-black/10"
-                    }
-                    onClick={() => setAmount(100)}
+                    className={`border border-black p-6 sm:p-10 text-center text-2xl sm:text-3xl ${
+                      amount === 1500
+                        ? "bg-primary text-white"
+                        : remainingAmount < 1500
+                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        : "hover:bg-black/10"
+                    }`}
+                    onClick={() => setAmount(1500)}
+                    disabled={remainingAmount < 1500}
                   >
-                    $100
+                    PKR 1500
                   </button>
                   <button
-                    className={
-                      amount !== 25 && amount !== 50 && amount !== 100
-                        ? "border border-black p-3 sm:p-5 text-center text-2xl sm:text-4xl bg-primary text-white"
-                        : "border border-black p-3 sm:p-5 text-center text-2xl sm:text-4xl hover:bg-black/10"
-                    }
+                    className={`border border-black p-3 sm:p-5 text-center text-2xl sm:text-3xl ${
+                      amount !== 500 && amount !== 1000 && amount !== 1500
+                        ? "bg-primary text-white"
+                        : "hover:bg-black/10"
+                    }`}
                   >
                     <span className="text-base sm:text-xl">Other</span>
-                    <div className="text-2xl sm:text-4xl whitespace-nowrap">
-                      $
+                    <div className="text-2xl sm:text-3xl">
+                      PKR
                       <input
                         type="number"
                         min={0}
-                        className="text-2xl sm:text-4xl border-b border-black w-16 sm:w-24 mt-2 sm:mt-3 text-center bg-transparent outline-none"
+                        max={remainingAmount}
+                        className="text-2xl sm:text-3xl border-b border-black w-24 mt-2 sm:mt-3 text-center bg-transparent outline-none"
                         value={amount}
-                        onChange={(e) => setAmount(parseFloat(e.target.value))}
+                        onChange={(e) => {
+                          const enteredAmount = parseFloat(e.target.value);
+                          if (enteredAmount <= remainingAmount) {
+                            setAmount(enteredAmount);
+                          } else if (!enteredAmount || isNaN(enteredAmount)) {
+                            setAmount(enteredAmount);
+                          }
+                        }}
                       />
                     </div>
+                    <span className="text-xs">Max: PKR {remainingAmount}</span>
                   </button>
                 </div>
               </div>

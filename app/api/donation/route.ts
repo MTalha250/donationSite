@@ -1,5 +1,6 @@
-import Fundraiser from "@/models/fundraiser";
+import Donation from "@/models/donation";
 import User from "@/models/user";
+import Fundraiser from "@/models/fundraiser";
 import dbConnect from "@/lib/database/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -10,41 +11,57 @@ export const POST = async (req: NextRequest) => {
     lastName,
     email,
     phone,
-    title,
-    description,
-    category,
-    image,
-    totalAmount,
+    paymentMethod,
+    amount,
+    fundraiser,
     user,
   } = await req.json();
   try {
-    const fundraiser = await Fundraiser.create({
+    const donation = await Donation.create({
       firstName,
       lastName,
       email,
       phone,
-      title,
-      description,
-      category,
-      image,
-      totalAmount,
+      paymentMethod,
+      amount,
+      fundraiser,
       user,
     });
     const updatedUser = await User.findByIdAndUpdate(
       user,
       {
-        $push: { fundraisers: fundraiser._id },
+        $push: { donations: donation._id },
       },
       { new: true }
     );
 
+    let updatedFundraiser = await Fundraiser.findByIdAndUpdate(
+      fundraiser,
+      {
+        $push: { donations: donation._id },
+        $inc: { amountRaised: amount },
+      },
+      { new: true }
+    );
+
+    if (updatedFundraiser.amountRaised >= updatedFundraiser.totalAmount) {
+      updatedFundraiser = await Fundraiser.findByIdAndUpdate(
+        fundraiser,
+        {
+          status: "Completed",
+        },
+        { new: true }
+      );
+    }
+
     return NextResponse.json(
       {
         success: true,
-        message: "Fundraiser created successfully",
-        fundraiser: {
-          ...fundraiser._doc,
+        message: "Donation created successfully",
+        donation: {
+          ...donation._doc,
           user: updatedUser,
+          fundraiser: updatedFundraiser,
         },
       },
       {
@@ -68,10 +85,8 @@ export const POST = async (req: NextRequest) => {
 export const GET = async (req: NextRequest) => {
   await dbConnect();
   try {
-    const fundraisers = await Fundraiser.find({
-      status: ["Active", "Completed"],
-    })
-      .populate("user donations")
+    const fundraisers = await Donation.find()
+      .populate("fundraiser user")
       .sort({ createdAt: -1 });
     return NextResponse.json(
       {

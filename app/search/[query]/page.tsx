@@ -6,15 +6,17 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { Fundraiser } from "@/types";
+import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
-const SearchPage = () => {
+const Query = () => {
   const [fundraisers, setFundraisers] = useState<Fundraiser[]>([]);
   const router = useRouter();
   const [search, setSearch] = useState<string>("");
+  const { query } = useParams();
   const fetchFundraisers = async () => {
     try {
-      const response = await axios.get("/api/fundraiser");
+      const response = await axios.get(`/api/search/${query}`);
       setFundraisers(response.data.result);
     } catch (error) {
       console.error(error);
@@ -23,7 +25,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     fetchFundraisers();
-  }, []);
+  }, [query]);
   return (
     <div>
       <div className="px-8 md:px-16 lg:px-24 xl:px-32 pt-32">
@@ -45,9 +47,12 @@ const SearchPage = () => {
           }}
         />
       </div>
-      <Grid title="Showing All Fundraisers" fundraisers={fundraisers} />
+      <Grid
+        title={"Showing Results for: " + decodeURIComponent(query.toString())}
+        fundraisers={fundraisers}
+      />
     </div>
   );
 };
 
-export default SearchPage;
+export default Query;

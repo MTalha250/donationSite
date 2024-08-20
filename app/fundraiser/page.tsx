@@ -82,7 +82,7 @@ const Fundraiser = () => {
           user: {
             ...data?.user,
             fundraisers: [
-              ...(data?.user?.fundraisers || []),
+              ...(data?.user?.fundraisers ?? []),
               response.data.fundraiser,
             ],
           },
@@ -104,7 +104,7 @@ const Fundraiser = () => {
         <div className="bg-black/50 top-0 left-0 absolute w-full h-full"></div>
       </div>
       <div className="flex justify-center bg-[#333333] py-6 md:py-10">
-        <div className="w-full max-w-3xl bg-[#F8F3E8] py-6 sm:py-8 md:py-10 px-8 md:px-16 -translate-y-20 md:-translate-y-32">
+        <div className="w-full max-w-4xl bg-[#F8F3E8] py-6 sm:py-8 md:py-10 px-8 md:px-16 -translate-y-20 md:-translate-y-32">
           <div className="flex items-center sm:gap-4 md:gap-6 justify-center">
             <div className="flex flex-col items-center">
               <span
@@ -190,48 +190,48 @@ const Fundraiser = () => {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 mb-8 sm:mb-10">
                   <button
                     className={
-                      amount === 35
-                        ? "border border-black p-6 sm:p-10 text-center text-2xl sm:text-4xl bg-primary text-white"
-                        : "border border-black p-6 sm:p-10 text-center text-2xl sm:text-4xl hover:bg-black/10"
+                      amount === 500
+                        ? "border border-black p-6 sm:p-10 text-center text-2xl sm:text-3xl bg-primary text-white"
+                        : "border border-black p-6 sm:p-10 text-center text-2xl sm:text-3xl hover:bg-black/10"
                     }
-                    onClick={() => setAmount(35)}
+                    onClick={() => setAmount(500)}
                   >
-                    $35
+                    PKR 500
                   </button>
                   <button
                     className={
-                      amount === 50
-                        ? "border border-black p-6 sm:p-10 text-center text-2xl sm:text-4xl bg-primary text-white"
-                        : "border border-black p-6 sm:p-10 text-center text-2xl sm:text-4xl hover:bg-black/10"
+                      amount === 1000
+                        ? "border border-black p-6 sm:p-10 text-center text-2xl sm:text-3xl bg-primary text-white"
+                        : "border border-black p-6 sm:p-10 text-center text-2xl sm:text-3xl hover:bg-black/10"
                     }
-                    onClick={() => setAmount(50)}
+                    onClick={() => setAmount(1000)}
                   >
-                    $50
+                    PKR 1000
                   </button>
                   <button
                     className={
-                      amount === 125
-                        ? "border border-black p-6 sm:p-10 text-center text-2xl sm:text-4xl bg-primary text-white"
-                        : "border border-black p-6 sm:p-10 text-center text-2xl sm:text-4xl hover:bg-black/10"
+                      amount === 1500
+                        ? "border border-black p-6 sm:p-10 text-center text-2xl sm:text-3xl bg-primary text-white"
+                        : "border border-black p-6 sm:p-10 text-center text-2xl sm:text-3xl hover:bg-black/10"
                     }
-                    onClick={() => setAmount(125)}
+                    onClick={() => setAmount(1500)}
                   >
-                    $125
+                    PKR 1500
                   </button>
                   <button
                     className={
                       amount !== 35 && amount !== 50 && amount !== 125
-                        ? "border border-black p-3 sm:p-5 text-center text-2xl sm:text-4xl bg-primary text-white"
-                        : "border border-black p-3 sm:p-5 text-center text-2xl sm:text-4xl hover:bg-black/10"
+                        ? "border border-black p-3 sm:p-5 text-center text-2xl sm:text-3xl bg-primary text-white"
+                        : "border border-black p-3 sm:p-5 text-center text-2xl sm:text-3xl hover:bg-black/10"
                     }
                   >
                     <span className="text-base sm:text-xl">Other</span>
-                    <div className="text-2xl sm:text-4xl whitespace-nowrap">
-                      $
+                    <div className="text-2xl sm:text-3xl">
+                      PKR{" "}
                       <input
                         type="number"
                         min={0}
-                        className="text-2xl sm:text-4xl border-b border-black w-16 sm:w-24 mt-2 sm:mt-3 text-center bg-transparent outline-none"
+                        className="text-2xl sm:text-3xl border-b border-black w-24  mt-2 sm:mt-3 text-center bg-transparent outline-none"
                         value={amount}
                         onChange={(e) => setAmount(parseFloat(e.target.value))}
                       />

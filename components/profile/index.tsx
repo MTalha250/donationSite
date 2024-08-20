@@ -122,7 +122,7 @@ const Profile = () => {
 
   return (
     <Dialog>
-      <DialogTrigger className="px-2 py-1.5 text-sm transition duration-200 hover:bg-neutral-100 w-full">
+      <DialogTrigger className="px-2 py-1.5 text-sm transition duration-200 hover:bg-slate-100 w-full">
         Profile
       </DialogTrigger>
       <DialogContent className="scrollbar scrollbar-none overflow-scroll w-full max-w-[1000px] h-full md:max-h-[520px] flex-col md:flex-row flex gap-10">
