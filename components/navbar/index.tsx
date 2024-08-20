@@ -47,11 +47,11 @@ const Navbar = () => {
       <div
         className={
           scrolled
-            ? "z-50 w-full left-0 bg-white fixed shadow-lg flex justify-between items-center transition duration-300 ease-in-out py-3 md:py-5 rounded-none top-0 scale-100 px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32"
-            : "z-50 w-full left-0 bg-white fixed shadow-lg flex justify-between items-center transition duration-300 ease-in-out py-3 md:py-5 rounded-full top-5 scale-[0.9] sm:scale-[0.8] px-6 sm:px-8 md:px-16"
+            ? "z-50 w-full left-0 bg-white fixed shadow-lg flex justify-between items-center transition duration-300 ease-in-out py-3 lg:py-5 rounded-none top-0 scale-100 px-6 sm:px-8 lg:px-16 xl:px-24 2xl:px-32"
+            : "z-50 w-full left-0 bg-white fixed shadow-lg flex justify-between items-center transition duration-300 ease-in-out py-3 lg:py-5 rounded-full top-5 scale-[0.9] sm:scale-[0.8] px-6 sm:px-8 lg:px-16"
         }
       >
-        <div className="hidden md:flex items-center">
+        <div className="hidden lg:flex items-center">
           <NavigationMenu>
             <NavigationMenuList>
               {navLinks.map((link) => (
@@ -62,7 +62,7 @@ const Navbar = () => {
                         {link.title}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid w-[300px] md:w-[500px] gap-3 p-4 md:grid-cols-2 lg:w-[600px] ">
+                        <ul className="grid w-[300px] lg:w-[500px] gap-3 p-4 lg:grid-cols-2 xl:w-[600px] ">
                           {link.children.map((child) => (
                             <li key={child.title}>
                               <Link
@@ -107,17 +107,17 @@ const Navbar = () => {
             </NavigationMenuList>
           </NavigationMenu>
         </div>
-        <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
+        <div className="lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2">
           <Link href="/">
-            <img src={logo.src} alt="logo" className="w-36 md:w-44" />
+            <img src={logo.src} alt="logo" className="w-36 lg:w-44" />
           </Link>
         </div>
         <div className="flex items-center">
           {user ? (
             <DropdownMenu>
-              <DropdownMenuTrigger className="mr-3 md:mr-5 px-2 md:px-4 py-2 hover:bg-slate-100 hover:text-slate-900 transition-colors rounded-lg">
-                <CiUser className="text-3xl md:hidden" />
-                <span className="hidden md:inline-block ml-2">
+              <DropdownMenuTrigger className="mr-3 lg:mr-5 px-2 lg:px-4 py-2 hover:bg-slate-100 hover:text-slate-900 transition-colors rounded-lg">
+                <CiUser className="text-3xl lg:hidden" />
+                <span className="hidden lg:inline-block ml-2">
                   Hi {user.firstName}
                 </span>
               </DropdownMenuTrigger>
@@ -139,22 +139,22 @@ const Navbar = () => {
           ) : (
             <Link
               href="/login"
-              className="mr-3 md:mr-5 px-2 md:px-4 py-2 hover:bg-slate-100 hover:text-slate-900 transition-colors rounded-lg"
+              className="mr-3 lg:mr-5 px-2 lg:px-4 py-2 hover:bg-slate-100 hover:text-slate-900 transition-colors rounded-lg"
             >
-              <CiUser className="text-3xl md:hidden" />
-              <span className="hidden md:inline-block ml-2">Sign in</span>
+              <CiUser className="text-3xl lg:hidden" />
+              <span className="hidden lg:inline-block ml-2">Sign in</span>
             </Link>
           )}
           <Link
             href="/fundraiser"
             className={
               scrolled
-                ? "mr-10 md:mr-0 flex items-center bg-primary rounded-full text-white font-semibold hover:bg-green-700 px-3 py-2"
-                : "mr-10 md:mr-0 flex items-center py-2 px-3 md:px-4 bg-transparent rounded-full border border-black text-lg text-black font-semibold hover:bg-primary hover:text-white"
+                ? "mr-10 lg:mr-0 flex items-center bg-primary rounded-full text-white font-semibold hover:bg-green-700 px-3 py-2"
+                : "mr-10 lg:mr-0 flex items-center py-2 px-3 lg:px-4 bg-transparent rounded-full border border-black text-lg text-black font-semibold hover:bg-primary hover:text-white"
             }
           >
-            <FaHandsHelping className="text-xl md:mr-2" />
-            <span className="hidden md:inline-block">Start a Fundraiser</span>
+            <FaHandsHelping className="text-xl lg:mr-2" />
+            <span className="hidden lg:inline-block">Start a Fundraiser</span>
           </Link>
         </div>
       </div>
