@@ -22,7 +22,7 @@ const Discover = () => {
   }, []);
 
   return (
-    <div className="mt-[80vh] rounded-t-[2rem] bg-white -translate-y-10 px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32 pt-20 pb-10">
+    <div className="mt-[70vh] sm:mt-[80vh] rounded-t-[2rem] bg-white -translate-y-10 px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32 pt-20 pb-10">
       <div className="flex flex-col md:flex-row justify-between items-center">
         <h1 className="font-semibold text-xl sm:text-2xl text-center md:text-left">
           Discover fundraisers inspired by what you care about

@@ -22,7 +22,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="text-[#18412E] h-[80vh] fixed w-full top-0 -z-10">
+    <div className="text-[#18412E] h-[70vh] sm:h-[80vh] fixed w-full top-0 -z-10">
       <motion.img
         src={img.src}
         alt=""
