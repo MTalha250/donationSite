@@ -27,24 +27,12 @@ const UserSchema = new mongoose.Schema(
       default: "user",
       enum: ["user", "admin"],
     },
-    fundraisers: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Fundraiser",
-        },
-      ],
-      default: [],
-    },
-    donations: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Donation",
-        },
-      ],
-      default: [],
-    },
+    fundraisers: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "Fundraiser", default: [] },
+    ],
+    donations: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "Donation", default: [] },
+    ],
   },
   { timestamps: true }
 );

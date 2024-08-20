@@ -10,7 +10,7 @@ export async function GET(
   try {
     const { query } = params;
     const fundraisers = await Fundraiser.find({
-      status: ["Active", "Completed"],
+      status: { $in: ["Active", "Completed"] },
       $or: [
         { title: { $regex: query, $options: "i" } },
         { description: { $regex: query, $options: "i" } },

@@ -11,7 +11,7 @@ export const GET = async (
   try {
     const fundraisers = await Fundraiser.find({
       category,
-      status: ["Active", "Completed"],
+      status: { $in: ["Active", "Completed"] },
     })
       .populate("user donations")
       .sort({ createdAt: -1 });

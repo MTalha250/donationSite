@@ -51,15 +51,9 @@ const fundraiserSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    donations: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Donation",
-        },
-      ],
-      default: [],
-    },
+    donations: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "Donation", default: [] },
+    ],
   },
   { timestamps: true }
 );

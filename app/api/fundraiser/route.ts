@@ -69,7 +69,7 @@ export const GET = async (req: NextRequest) => {
   await dbConnect();
   try {
     const fundraisers = await Fundraiser.find({
-      status: ["Active", "Completed"],
+      status: { $in: ["Active", "Completed"] },
     })
       .populate("user donations")
       .sort({ createdAt: -1 });
