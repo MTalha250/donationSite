@@ -88,9 +88,7 @@ const Sidebar = ({
       </motion.div>
       <button
         className={
-          scroll
-            ? "fixed z-50 top-6 right-6"
-            : "fixed z-50 top-[2.7rem] right-10"
+          scroll ? "fixed z-50 top-6 right-8" : "fixed z-50 top-12 right-10"
         }
         onClick={() => setOpen(!open)}
       >
