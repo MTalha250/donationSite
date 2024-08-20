@@ -89,8 +89,8 @@ const Sidebar = ({
       <button
         className={
           scroll
-            ? "fixed z-50 top-[1.6rem] right-6"
-            : "fixed z-50 top-[2.75rem] right-10"
+            ? "fixed z-50 top-[1.65rem] right-5"
+            : "fixed z-50 top-[2.8rem] right-10"
         }
         onClick={() => setOpen(!open)}
       >
