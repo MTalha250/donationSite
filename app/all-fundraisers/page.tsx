@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Fundraiser } from "@/types";
 
-const page = () => {
+const Page = () => {
   const [fundraisers, setFundraisers] = useState<Fundraiser[]>([]);
   const fetchFundraisers = async () => {
     try {
@@ -44,4 +44,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
