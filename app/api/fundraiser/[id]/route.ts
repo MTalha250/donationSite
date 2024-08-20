@@ -1,6 +1,8 @@
 import Fundraiser from "@/models/fundraiser";
 import dbConnect from "@/lib/database/mongodb";
 import { NextRequest, NextResponse } from "next/server";
+import User from "@/models/user";
+import Donation from "@/models/donation";
 
 export const PUT = async (
   req: NextRequest,
@@ -94,7 +96,15 @@ export const GET = async (
   await dbConnect();
   const { id } = params;
   try {
-    const fundraiser = await Fundraiser.findById(id).populate("user donations");
+    const fundraiser = await Fundraiser.findById(id)
+      .populate({
+        path: "user",
+        model: User,
+      })
+      .populate({
+        path: "donations",
+        model: Donation,
+      });
     return NextResponse.json(
       {
         success: true,

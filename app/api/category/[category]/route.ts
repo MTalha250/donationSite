@@ -1,6 +1,8 @@
 import Fundraiser from "@/models/fundraiser";
 import dbConnect from "@/lib/database/mongodb";
 import { NextRequest, NextResponse } from "next/server";
+import User from "@/models/user";
+import Donation from "@/models/donation";
 
 export const GET = async (
   req: NextRequest,
@@ -13,7 +15,14 @@ export const GET = async (
       category,
       status: { $in: ["Active", "Completed"] },
     })
-      .populate("user donations")
+      .populate({
+        path: "user",
+        model: User,
+      })
+      .populate({
+        path: "donations",
+        model: Donation,
+      })
       .sort({ createdAt: -1 });
     return NextResponse.json(
       {

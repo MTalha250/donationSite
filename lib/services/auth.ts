@@ -2,11 +2,15 @@ import dbConnect from "../database/mongodb";
 import User from "@/models/user";
 import bcrypt from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
+import Fundraiser from "@/models/fundraiser";
 export async function login(credentials: any) {
   try {
     const { email, password } = credentials;
     await dbConnect();
-    const user = await User.findOne({ email }).populate("fundraisers");
+    const user = await User.findOne({ email }).populate({
+      path: "fundraisers",
+      model: Fundraiser,
+    });
     if (!user) {
       throw new Error("User not found");
     }

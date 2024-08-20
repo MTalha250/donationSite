@@ -2,6 +2,7 @@ import Fundraiser from "@/models/fundraiser";
 import User from "@/models/user";
 import dbConnect from "@/lib/database/mongodb";
 import { NextRequest, NextResponse } from "next/server";
+import Donation from "@/models/donation";
 
 export const POST = async (req: NextRequest) => {
   await dbConnect();
@@ -71,7 +72,14 @@ export const GET = async (req: NextRequest) => {
     const fundraisers = await Fundraiser.find({
       status: { $in: ["Active", "Completed"] },
     })
-      .populate("user donations")
+      .populate({
+        path: "user",
+        model: User,
+      })
+      .populate({
+        path: "donations",
+        model: Donation,
+      })
       .sort({ createdAt: -1 });
     return NextResponse.json(
       {
@@ -83,6 +91,7 @@ export const GET = async (req: NextRequest) => {
       }
     );
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       {
         success: false,
