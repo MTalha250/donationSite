@@ -7,188 +7,127 @@ import {
   FaTiktok,
   FaPodcast,
 } from "react-icons/fa";
-import { FiChevronDown } from "react-icons/fi";
+import logo from "@/assets/logo.png";
+import { navLinks } from "@/constants";
+import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t border-gray-200 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900">Donate</h3>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Categories
-                </a>
-              </li>
-            </ul>
-          </div>
+    <footer className="bg-[#333333] text-white py-10 px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <Link href="/" className="flex items-center justify-center">
+          <img src={logo.src} alt="Caring 4 All" className="w-48 sm:w-56" />
+        </Link>
 
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900">Fundraise</h3>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  How to start a fundraiser
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Fundraising categories
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Team fundraising
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Fundraising blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Charity fundraising
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Sign up as a charity
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Corporate fundraising
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Event fundraising
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900">About</h3>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  How Caring 4 All works
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Our Giving Guarantee
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Supported countries
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Help Centre
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  About Caring 4 All
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Press Centre
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  Caring4All.com
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900">
-              More resources
+        {navLinks.slice(1).map((navLink, index) => (
+          <div key={index}>
+            <h3 className="text-lg font-semibold text-gray-100">
+              {navLink.title}
             </h3>
-            <div className="mt-4 flex items-center text-gray-600 hover:text-gray-900 cursor-pointer">
-              <span>More resources</span>
-              <FiChevronDown className="ml-2" />
-            </div>
+            <ul className="mt-4 space-y-3">
+              {navLink.children?.map((link) => (
+                <li key={link.title}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-400 hover:text-white transition-colors duration-300"
+                  >
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+        ))}
+      </div>
 
-        <div className="mt-8 border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-sm text-gray-600">&copy; 2024 Caring 4 All</div>
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            <a href="#" className="text-gray-600 hover:text-gray-900">
-              Terms
-            </a>
-            <a href="#" className="text-gray-600 hover:text-gray-900">
-              Privacy Notice
-            </a>
-            <a href="#" className="text-gray-600 hover:text-gray-900">
-              Legal
-            </a>
-            <a href="#" className="text-gray-600 hover:text-gray-900">
-              Cookie Policy
-            </a>
-            <a href="#" className="text-gray-600 hover:text-gray-900">
-              Your Privacy Choices
-            </a>
-          </div>
+      <div className="mt-12 border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="text-sm text-gray-400">&copy; 2024 Caring 4 All</div>
+        <div className="flex flex-wrap justify-center space-x-4 mt-6 md:mt-0">
+          <a
+            href="#"
+            className="text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            Terms
+          </a>
+          <a
+            href="#"
+            className="text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            Privacy Notice
+          </a>
+          <a
+            href="#"
+            className="text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            Legal
+          </a>
+          <a
+            href="#"
+            className="text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            Cookie Policy
+          </a>
+          <a
+            href="#"
+            className="text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            Your Privacy Choices
+          </a>
         </div>
+      </div>
 
-        <div className="mt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <div className="flex space-x-4">
-            <a href="#" className="text-gray-600 hover:text-gray-900">
-              <FaFacebook size={20} />
-            </a>
-            <a href="#" className="text-gray-600 hover:text-gray-900">
-              <FaYoutube size={20} />
-            </a>
-            <a href="#" className="text-gray-600 hover:text-gray-900">
-              <FaTwitter size={20} />
-            </a>
-            <a href="#" className="text-gray-600 hover:text-gray-900">
-              <FaInstagram size={20} />
-            </a>
-            <a href="#" className="text-gray-600 hover:text-gray-900">
-              <FaTiktok size={20} />
-            </a>
-            <a href="#" className="text-gray-600 hover:text-gray-900">
-              <FaPodcast size={20} />
-            </a>
-          </div>
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            <a
-              href="#"
-              className="bg-gray-100 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-200"
-            >
-              Get it on Google Play
-            </a>
-            <a
-              href="#"
-              className="bg-gray-100 px-4 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-200"
-            >
-              Download on the App Store
-            </a>
-          </div>
+      <div className="mt-8 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+        <div className="flex justify-center space-x-6">
+          <a
+            href="#"
+            className="text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            <FaFacebook size={24} />
+          </a>
+          <a
+            href="#"
+            className="text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            <FaYoutube size={24} />
+          </a>
+          <a
+            href="#"
+            className="text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            <FaTwitter size={24} />
+          </a>
+          <a
+            href="#"
+            className="text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            <FaInstagram size={24} />
+          </a>
+          <a
+            href="#"
+            className="text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            <FaTiktok size={24} />
+          </a>
+          <a
+            href="#"
+            className="text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            <FaPodcast size={24} />
+          </a>
+        </div>
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+          <a
+            href="#"
+            className="bg-neutral-700 hover:bg-neutral-600 px-5 py-3 rounded-lg text-sm text-gray-300 hover:text-white transition-colors duration-300 text-center"
+          >
+            Get it on Google Play
+          </a>
+          <a
+            href="#"
+            className="bg-neutral-700 hover:bg-neutral-600 px-5 py-3 rounded-lg text-sm text-gray-300 hover:text-white transition-colors duration-300 text-center"
+          >
+            Download on the App Store
+          </a>
         </div>
       </div>
     </footer>

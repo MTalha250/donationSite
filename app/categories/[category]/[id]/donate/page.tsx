@@ -107,7 +107,7 @@ const Donation = () => {
         <div className="bg-black/50 top-0 left-0 absolute w-full h-full"></div>
       </div>
       <div className="flex justify-center bg-[#333333] py-6 md:py-10">
-        <div className="w-full max-w-4xl bg-[#F8F3E8] py-6 sm:py-8 md:py-10 px-8 md:px-16 -translate-y-20 md:-translate-y-32">
+        <div className="w-full max-w-4xl bg-[#F8F3E8] py-6 sm:py-8 md:py-10 px-6 sm:px-8 md:px-16 -translate-y-20 md:-translate-y-32">
           <h1 className="text-center font-semibold text-lg">
             {fundraiser?.title}
           </h1>

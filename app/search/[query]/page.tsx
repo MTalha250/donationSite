@@ -28,8 +28,8 @@ const Query = () => {
   }, [query]);
   return (
     <div>
-      <div className="px-8 md:px-16 lg:px-24 xl:px-32 pt-32">
-        <h1 className="text-3xl text-center font-bold">
+      <div className="px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32 pt-32">
+        <h1 className="text-2xl md:text-3xl text-center font-bold">
           Search fundraisers on Caring 4 All
         </h1>
         <p className="text-center text-neutral-500 my-5 text-sm">

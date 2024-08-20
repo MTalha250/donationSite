@@ -76,7 +76,7 @@ export const navLinks = [
       },
       {
         title: "Donate",
-        href: "/take-action/donate",
+        href: "/all-fundraisers",
         description: "Support a campaign with your contribution.",
         icon: BiDonateHeart,
       },

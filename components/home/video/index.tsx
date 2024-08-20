@@ -16,7 +16,7 @@ const Video = () => {
   };
 
   return (
-    <div className="px-8 md:px-16 lg:px-24 xl:px-32 py-20 bg-white">
+    <div className="px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32 py-20 bg-white">
       <h2 className="text-xl sm:text-2xl font-semibold text-center">
         How Caring 4 All Works
       </h2>
@@ -34,8 +34,10 @@ const Video = () => {
           aria-label="Play Video"
           onClick={openModal}
         >
-          <FaPlay className="h-6 w-6 text-black" />
-          <span className="ml-2 text-sm">Play 1 min video</span>
+          <FaPlay className="sm:h-6 sm:w-6 w-4 h-4 text-black" />
+          <span className="ml-2 text-sm whitespace-nowrap">
+            Play 1 min video
+          </span>
         </button>
       </div>
       <Modal

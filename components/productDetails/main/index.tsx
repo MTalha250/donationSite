@@ -12,8 +12,8 @@ const Main = ({ fundraiser }: { fundraiser: Fundraiser }) => {
   const { category, id } = useParams();
 
   return (
-    <div className="px-8 md:px-16 lg:px-24 xl:px-32 pt-32 pb-20">
-      <h1 className="text-3xl md:text-4xl font-semibold mb-5 text-center md:text-left">
+    <div className="px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32 pt-32 pb-20">
+      <h1 className="text-3xl md:text-4xl font-semibold mb-5">
         {fundraiser?.title}
       </h1>
       <div className="flex flex-col lg:flex-row gap-10">
@@ -109,20 +109,20 @@ const Main = ({ fundraiser }: { fundraiser: Fundraiser }) => {
           </Dialog>
           <Link
             href="/"
-            className="rounded-lg text-center bg-yellow-500 py-3 w-full font-semibold text-xs md:text-sm mb-3"
+            className="rounded-lg text-center bg-gradient-to-b  from-yellow-500 to-yellow-600 py-3 w-full font-bold text-xs md:text-sm mb-3"
           >
             Share
           </Link>
           {fundraiser?.amountRaised < fundraiser?.totalAmount && (
             <Link
               href={`/categories/${category}/${id}/donate`}
-              className="rounded-lg text-center bg-yellow-500 py-3 w-full font-semibold text-xs md:text-sm"
+              className="rounded-lg text-center   bg-gradient-to-b  from-yellow-500 to-yellow-600 py-3 w-full font-bold text-xs md:text-sm"
             >
               Donate Now
             </Link>
           )}
           {fundraiser?.amountRaised >= fundraiser?.totalAmount && (
-            <p className="rounded-lg text-center bg-primary text-white py-3 w-full font-semibold text-xs md:text-sm">
+            <p className="rounded-lg text-center bg-gradient-to-b from-primary to-primary-dark text-white py-3 w-full font-semibold text-xs md:text-sm">
               Fundraiser Completed
             </p>
           )}

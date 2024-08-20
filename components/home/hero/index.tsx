@@ -29,7 +29,7 @@ const Hero = () => {
         className="w-full h-full object-cover absolute top-0 left-0"
         style={{ scale }}
       />
-      <div className="flex flex-col justify-center items-center space-y-4 sm:space-y-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center px-4 sm:px-0">
+      <div className="flex flex-col justify-center items-center space-y-4 sm:space-y-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center px-6 sm:px-0">
         <p className="text-lg sm:text-xl font-semibold">
           Your actions can change lives
         </p>
@@ -38,7 +38,7 @@ const Hero = () => {
         </h1>
         <Link
           href="/fundraiser"
-          className="bg-white px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-bold text-sm sm:text-base"
+          className="bg-gray-50 hover:bg-white  px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-bold text-sm sm:text-base transition duration-300"
         >
           Start a Fundraiser
         </Link>
