@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { FaUser, FaHandsHelping } from "react-icons/fa";
+import { FaHandsHelping } from "react-icons/fa";
 import { CiUser } from "react-icons/ci";
 import logo from "@/assets/logo.png";
 import {
@@ -116,7 +116,7 @@ const Navbar = () => {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger className="mr-3 md:mr-5 px-2 md:px-4 py-2 hover:bg-slate-100 hover:text-slate-900 transition-colors rounded-lg">
-                <FaUser className="text-2xl md:hidden" />
+                <CiUser className="text-3xl md:hidden" />
                 <span className="hidden md:inline-block ml-2">
                   Hi {user.firstName}
                 </span>
