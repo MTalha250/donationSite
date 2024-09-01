@@ -6,6 +6,9 @@ import { useParams } from "next/navigation";
 import { categoryData } from "@/constants";
 import { Fundraiser } from "@/types";
 import axios from "axios";
+import Faqs from "@/components/category/faqs";
+import WhySetup from "@/components/category/whySetup";
+import FundraisingTips from "@/components/category/fundraisingTips";
 
 const Category = () => {
   const { category } = useParams();
@@ -28,6 +31,9 @@ const Category = () => {
     <div>
       <Hero title={title || ""} image={image || ""} />
       <Grid title={subHeading ?? ""} fundraisers={fundraisers} />
+      <WhySetup />
+      <FundraisingTips />
+      <Faqs />
     </div>
   );
 };

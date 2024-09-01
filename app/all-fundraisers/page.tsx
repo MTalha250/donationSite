@@ -4,6 +4,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Fundraiser } from "@/types";
+import Faqs from "@/components/category/faqs";
+import WhySetup from "@/components/category/whySetup";
+import FundraisingTips from "@/components/category/fundraisingTips";
 
 const Page = () => {
   const [fundraisers, setFundraisers] = useState<Fundraiser[]>([]);
@@ -40,6 +43,9 @@ const Page = () => {
         title="Discover fundraisers inspired by what you care about"
         fundraisers={fundraisers}
       />
+      <WhySetup />
+      <FundraisingTips />
+      <Faqs />
     </>
   );
 };

@@ -3,6 +3,9 @@ import Discover from "@/components/home/discover";
 import Hero from "@/components/home/hero";
 import Video from "@/components/home/video";
 import React from "react";
+import Faqs from "@/components/category/faqs";
+import WhySetup from "@/components/category/whySetup";
+import FundraisingTips from "@/components/category/fundraisingTips";
 
 const page = () => {
   return (
@@ -20,6 +23,9 @@ const page = () => {
         title="We've got everything you need."
         description="CARING 4 ALL is a trusted leader in online fundraising. With straightforward pricing and a dedicated team of Trust & Safety experts supporting you, you can raise money or make a donation with complete confidence."
       />
+      <WhySetup />
+      <FundraisingTips />
+      <Faqs />
     </div>
   );
 };
