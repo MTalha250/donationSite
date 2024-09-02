@@ -93,10 +93,9 @@ const Main = ({ fundraiser }: { fundraiser: Fundraiser }) => {
                           PKR {donation.amount}
                         </p>
                         <p className="text-xs md:text-sm text-gray-600">
-                          {donation.paymentMethod} -{" "}
-                          {donation.paymentStatus === "Completed"
-                            ? "Paid"
-                            : "Pending"}
+                          {donation.paymentMethod[0].toUpperCase() +
+                            donation.paymentMethod.slice(1)}{" "}
+                          - {donation.paymentStatus}
                         </p>
                       </div>
                     </div>
